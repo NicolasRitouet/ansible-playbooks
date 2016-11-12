@@ -1,0 +1,42 @@
+---
+- name: Create a base server
+  hosts: all
+  become: yes
+  become_user: root
+  gather_facts: false
+  vars_files:
+    - vars/main.yml
+    - vars/ssh-public-key.yml
+    - vars/nvm.yml
+
+  pre_tasks:
+    - name: 'install python2'
+      raw: apt-get -y install python-simplejson
+      changed_when: False
+    - setup: # aka gather_facts
+
+  tasks:
+    - include: 'tasks/utils.yml'
+    - include: 'tasks/user.yml'
+    - include: 'tasks/nvm.yml'
+    
+  roles:
+    - role: jdauphant.nginx
+      nginx_http_params:
+        - sendfile "on"
+        - access_log "/var/log/nginx/access.log"
+      nginx_sites:
+        autogram:
+           - listen 80
+           - server_name autogram.space
+           - root /home/deploy/www
+           - location / { try_files $uri $uri/ /index.html; }
+           - location /images/ { try_files $uri $uri/ /index.html; }
+      nginx_configs:
+        proxy:
+          - proxy_set_header X-Real-IP  $remote_addr
+          - proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for
+
+  handlers:
+    - name: Restart ssh
+      service: name=ssh state=restarted

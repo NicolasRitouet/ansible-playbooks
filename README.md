@@ -1,11 +1,12 @@
 # Bootstrap a nodejs server
 
-> This ansible playbook will secure a new server and install node on it.
+> This ansible playbook will secure a new server, install a few utilities and nvm/node on it.
 
 ## Getting started
 
 ```bash
-ansible-playbook bootstrap.yml -u <user_name> -K
+ansible-galaxy install jdauphant.nginx
+ansible-playbook bootstrap.yml -u root -K
 ```
 
 ### Credits

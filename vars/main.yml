@@ -1,0 +1,31 @@
+---
+server_user_name: deploy
+
+# pip install passlib
+# python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt(getpass.getpass())"
+server_user_password: $6$rounds=656000$VLoU0f4RVU3vuJYE$jbl7.CjofhdS0Opmk9rBi1mUtK3AlcJeH/OKu1lZGRjKnwzGoBLbPpq/6CP8VrrGQRsrm3IwU0vY8.AomGQnE1
+logwatch_email: nicolas@ritouet.com
+
+
+utilities:
+  - python
+  - git
+  - ufw
+  - fail2ban
+  - unattended-upgrades
+  - logwatch
+  - htop
+  - command-not-found
+  - curl
+  - ack-grep
+  - dstat
+  - debconf
+  - nmap
+  - ltrace
+  - multitail
+  - sysstat
+
+ufw_allowed_ports:
+  - 22
+  - 80
+  - 443
