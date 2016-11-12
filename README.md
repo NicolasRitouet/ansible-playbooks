@@ -4,6 +4,8 @@
 
 > This ansible playbook will secure a new server, install a few utilities and nvm/node on it.
 
+:hand: This playbook has only been tested with Ubuntu 16.04 aka Xenial64.
+
 ## Getting started
 
 ```bash

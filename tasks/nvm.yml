@@ -9,21 +9,21 @@
 
 - name: check if nvm installed
   become: true
-  become_user: "{{ nvm_user }}"
+  become_user: "{{ server_user_name }}"
   stat: path=~/.nvm
   register: nvm_path
   changed_when: False
 
 - name: install nvm
   become: true
-  become_user: "{{ nvm_user }}"
-  git: repo=https://github.com/creationix/nvm.git dest=~/.nvm version={{nvm_version}}
+  become_user: "{{ server_user_name }}"
+  git: repo=https://github.com/creationix/nvm.git dest=~/.nvm version={{ nvm_version }}
   when: not nvm_path.stat.exists
   tags: nvm
 
 - name: source nvm in ~/.profile
   become: true
-  become_user: "{{ nvm_user }}"
+  become_user: "{{ server_user_name }}"
   lineinfile: >
     dest=~/.profile
     line="source ~/.nvm/nvm.sh"
@@ -31,7 +31,7 @@
 
 - name: check installed node version
   become: true
-  become_user: "{{ nvm_user }}"
+  become_user: "{{ server_user_name }}"
   command: bash -c '. ~/.nvm/nvm.sh; nvm ls'
   register: nvm_install_result
   changed_when: False

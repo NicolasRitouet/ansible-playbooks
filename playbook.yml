@@ -26,12 +26,16 @@
         - sendfile "on"
         - access_log "/var/log/nginx/access.log"
       nginx_sites:
-        autogram:
+        frontend:
            - listen 80
            - server_name autogram.space
            - root /home/deploy/www
-           - location / { try_files $uri $uri/ /index.html; }
-           - location /images/ { try_files $uri $uri/ /index.html; }
+           - index index.html;
+           - location / { try_files $uri$args $uri$args/ $uri $uri/ /index.html =404; }
+        backend:
+            - listen 80
+            - server_name api.autogram.space
+            - location / { proxy_pass http://localhost:8080; }
       nginx_configs:
         proxy:
           - proxy_set_header X-Real-IP  $remote_addr
