@@ -30,12 +30,12 @@
            - listen 80
            - server_name autogram.space
            - root /home/deploy/www
-           - index index.html;
+           - index index.html
            - location / { try_files $uri$args $uri$args/ $uri $uri/ /index.html =404; }
         backend:
             - listen 80
             - server_name api.autogram.space
-            - location / { proxy_pass http://localhost:8080; }
+            - location / { proxy_pass http://localhost:3000; }
       nginx_configs:
         proxy:
           - proxy_set_header X-Real-IP  $remote_addr
