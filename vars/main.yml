@@ -3,7 +3,7 @@ server_user_name: deploy
 
 # pip install passlib
 # python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt(getpass.getpass())"
-server_user_password: $6$rounds=656000$VLoU0f4RVU3vuJYE$jbl7.CjofhdS0Opmk9rBi1mUtK3AlcJeH/OKu1lZGRjKnwzGoBLbPpq/6CP8VrrGQRsrm3IwU0vY8.AomGQnE1
+server_user_password: $6$rounds=656000$CYLSYXJMSjoow7ap$sHNUKCxBaI3v6UkTxitBcPCT2qXQCOjIlQLmFsZa3LtPFetEpMmKEtrk62cq7j47DI.HgKcFmRkesjk0eKC2b1
 logwatch_email: nicolas@ritouet.com
 
 

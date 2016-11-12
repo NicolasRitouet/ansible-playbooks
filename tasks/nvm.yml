@@ -39,14 +39,14 @@
 
 - name: install nodejs using nvm
   become: true
-  become_user: "{{ nvm_user }}"
+  become_user: "{{ server_user_name }}"
   command: bash -c '. ~/.nvm/nvm.sh; nvm install {{ nvm_node_version }}'
   when: nvm_install_result|failed or nvm_install_result.stdout.find('{{ nvm_node_version }}') == -1
   tags: nvm
 
 - name: check the default nodejs version
   become: true
-  become_user: "{{ nvm_user }}"
+  become_user: "{{ server_user_name }}"
   command: bash -c '. ~/.nvm/nvm.sh; nvm ls | grep -e "default -> {{ nvm_node_version }}"'
   register: nvm_check_default
   changed_when: False
@@ -55,15 +55,15 @@
 
 - name: set default node version
   become: true
-  become_user: "{{ nvm_user }}"
+  become_user: "{{ server_user_name }}"
   command: bash -c '. ~/.nvm/nvm.sh; nvm alias default {{ nvm_node_version }}'
   when: nvm_check_default|failed
   tags: nvm
 
-- name: install packages for each user
+- name: install global packages
   shell: bash -lc "nvm use {{ item.0 }} && npm install -g {{ item.1 }}"
   become: true
-  become_user: "{{ nvm_user }}"
+  become_user: "{{ server_user_name }}"
   with_nested:
     - "{{ nvm_node_version }}"
     - "{{ nvm_global_packages }}"

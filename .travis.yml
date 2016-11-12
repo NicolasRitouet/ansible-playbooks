@@ -16,4 +16,4 @@ script:
   - ansible-galaxy install jdauphant.nginx
   - echo localhost > inventory
   - ansible-playbook -i inventory playbook.yml --syntax-check
-  - ansible-playbook -i inventory playbook.yml --connection=local --sudo
+  # - ansible-playbook -i inventory playbook.yml --connection=local --sudo
