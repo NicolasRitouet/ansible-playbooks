@@ -1,8 +1,10 @@
 - name: Update APT packages cache
   raw: apt-get update -qq
+  when: ansible_os_family == 'Debian'
 
 - name: Perform aptitude safe-upgrade
   raw: apt-get upgrade -y
+  when: ansible_os_family == 'Debian'
 
 - name: Install required packages
   apt: state=installed pkg={{ item }}
