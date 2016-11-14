@@ -6,11 +6,25 @@
 
 :hand: This playbook has only been tested with Ubuntu 16.04 aka Xenial64.
 
+## Details
+
+- create a user (`deploy`) with sudo rights
+- add specified public ssh keys
+- disallow root login
+- disallow password authentication
+- install utilities
+- install ufw and set it up
+- install  and setup postfix and logwatch
+- install nvm and node 7 as default
+- install global node packages
+- install and setup nginx
+
+
 ## Getting started
 
 ```bash
 ansible-galaxy install jdauphant.nginx
-ansible-playbook bootstrap.yml -u root -K
+ansible-playbook playbook.yml -u root -K
 ```
 
 ## Make it yours
@@ -24,6 +38,10 @@ ansible-playbook bootstrap.yml -u root -K
 ## Requirements
 
 - Ansible
+
+## TODO
+
+- add letsencrypt tasks
 
 ## Credits
 

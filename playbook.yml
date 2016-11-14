@@ -19,7 +19,7 @@
     - include: 'tasks/utils.yml'
     - include: 'tasks/user.yml'
     - include: 'tasks/nvm.yml'
-    
+
   roles:
     - role: jdauphant.nginx
       nginx_http_params:
@@ -28,13 +28,13 @@
       nginx_sites:
         frontend:
            - listen 80
-           - server_name autogram.space
+           - server_name {{ domain_name }}
            - root /home/deploy/www
            - index index.html
            - location / { try_files $uri$args $uri$args/ $uri $uri/ /index.html =404; }
         backend:
             - listen 80
-            - server_name api.autogram.space
+            - server_name api.{{ domain_name }}
             - location / { proxy_pass http://localhost:3000; }
       nginx_configs:
         proxy:

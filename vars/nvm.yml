@@ -1,4 +1,4 @@
 ---
 nvm_version: "v0.32.1"
-nvm_node_version: "7.1.0"
-nvm_global_packages: [ pm2 ]
+nvm_node_version: "6"
+nvm_global_packages: [ pm2, yarn, gulp ]
