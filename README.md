@@ -6,6 +6,20 @@
 
 :hand: This playbook has only been tested with Ubuntu 16.04 aka Xenial64.
 
+## Details
+
+- create a user (`deploy`) with sudo rights
+- add specified public ssh keys
+- disallow root login
+- disallow password authentication
+- install utilities
+- install ufw and set it up
+- install  and setup postfix and logwatch
+- install nvm and node 7 as default
+- install global node packages
+- install and setup nginx
+
+
 ## Getting started
 
 ### Secure playbook
@@ -31,9 +45,8 @@ ansible-playbook secure.yml -u root
 - install nginx
 
 ```bash
-ansible-galaxy install DavidWittman.redis
+ansible-galaxy install jdauphant.nginx
 ansible-playbook node.yml -u deploy
-```
 
 
 ### Redis playbook
@@ -46,6 +59,10 @@ ansible-playbook redis.yml -u deploy
 ## Requirements
 
 - Ansible
+
+## TODO
+
+- add letsencrypt tasks
 
 ## Credits
 

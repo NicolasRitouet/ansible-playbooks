@@ -1,10 +1,11 @@
 ---
+domain_name: example.com
 server_user_name: deploy
 
 # pip install passlib
 # python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt(getpass.getpass())"
-server_user_password: $6$rounds=656000$CYLSYXJMSjoow7ap$sHNUKCxBaI3v6UkTxitBcPCT2qXQCOjIlQLmFsZa3LtPFetEpMmKEtrk62cq7j47DI.HgKcFmRkesjk0eKC2b1
-logwatch_email: nicolas@ritouet.com
+server_user_password: $6$rounds=656000$wWkX5ahIkQ9xiZu4$oKvSxSTGJe8P2goVrmkBfP388TH5Pf2MtsVEd.InIeo4rmraIVuFZaiGYwydGziKTMbXUSXBYu7rDwgH.avGw/
+logwatch_email: example@example.com
 
 ufw_allowed_ports:
   - 22
