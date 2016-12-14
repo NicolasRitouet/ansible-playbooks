@@ -1,0 +1,14 @@
+---
+
+utilities:
+  - python
+  - git
+  - htop
+  - iotop
+  - curl
+  - ack-grep
+  - dstat
+  - nmap
+  - ltrace
+  - multitail
+  - sysstat

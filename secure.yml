@@ -1,0 +1,25 @@
+---
+- name: Secure a base server
+  hosts: all
+  become: yes
+  become_user: root
+  gather_facts: false
+  vars_files:
+    - vars/main.yml
+    - vars/ssh-public-key.yml
+
+  pre_tasks:
+    - name: 'install python2'
+      raw: apt-get -y install python-simplejson
+      changed_when: False
+    - setup: # aka gather_facts
+    
+  roles:
+    - role: update
+    - role: secure
+    - role: user
+
+
+  handlers:
+    - name: Restart ssh
+      service: name=ssh state=restarted

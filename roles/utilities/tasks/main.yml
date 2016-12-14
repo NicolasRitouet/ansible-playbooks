@@ -1,0 +1,6 @@
+- name: Install required packages
+  apt: state=installed pkg={{ item }}
+  become: yes
+  with_items: 
+  - "{{ utilities }}"
+  when: utilities|length > 0

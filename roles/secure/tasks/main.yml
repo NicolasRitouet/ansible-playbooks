@@ -1,18 +1,8 @@
-- name: install apt requirements
-  become: yes
-  apt: pkg=aptitude
+- name: Install fail2ban
+  apt: state=installed pkg=fail2ban
 
-- name: update and upgrade apt packages
-  apt: >
-    upgrade=yes
-    update_cache=yes
-    cache_valid_time=3600
-
-- name: Install required packages
-  apt: state=installed pkg={{ item }}
-  with_items: 
-  - "{{ utilities }}"
-  when: utilities|length > 0
+- name: Install ufw
+  apt: state=installed pkg=ufw
 
 - name: Allow ssh and http(s) connections
   ufw: rule=allow port={{ item }}
@@ -24,14 +14,17 @@
   ufw: state=enabled policy=deny
   when: ufw_allowed_ports|length > 0
 
+- name: Install logwatch
+  apt: state=installed pkg=logwatch
+
 - name: Set up Postfix to relay mail
   debconf: name=postfix
             question='{{ item.question }}'
             value='{{ item.value }}'
             vtype='{{ item.vtype }}'
   with_items:
-    - { question: 'postfix/mailname', value: 'feature-deployment', vtype: 'string' }
-    - { question: 'postfix/main_mailer_type', value: 'feature', vtype: 'string' }
+    - { question: 'postfix/mailname', value: '{{ ansible_fqdn }}', vtype: 'string' }
+    - { question: 'postfix/main_mailer_type', value: 'Internet Site', vtype: 'string' }
 
 - name: Email logwatch summary daily
   lineinfile: dest=/etc/cron.daily/00logwatch

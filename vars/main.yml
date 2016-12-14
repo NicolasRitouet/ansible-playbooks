@@ -6,25 +6,6 @@ server_user_name: deploy
 server_user_password: $6$rounds=656000$CYLSYXJMSjoow7ap$sHNUKCxBaI3v6UkTxitBcPCT2qXQCOjIlQLmFsZa3LtPFetEpMmKEtrk62cq7j47DI.HgKcFmRkesjk0eKC2b1
 logwatch_email: nicolas@ritouet.com
 
-
-utilities:
-  - python
-  - git
-  - ufw
-  - fail2ban
-  - unattended-upgrades
-  - logwatch
-  - htop
-  - command-not-found
-  - curl
-  - ack-grep
-  - dstat
-  - debconf
-  - nmap
-  - ltrace
-  - multitail
-  - sysstat
-
 ufw_allowed_ports:
   - 22
   - 80

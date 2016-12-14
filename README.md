@@ -2,24 +2,46 @@
 
 [![Build Status](https://travis-ci.org/NicolasRitouet/ansible-playbooks.svg?branch=master)](https://travis-ci.org/NicolasRitouet/ansible-playbooks)
 
-> This ansible playbook will secure a new server, install a few utilities and nvm/node on it.
+> This repo contains 3 ansible playbooks, one to secure a bare server, one to install node/nginx and one for redis
 
 :hand: This playbook has only been tested with Ubuntu 16.04 aka Xenial64.
 
 ## Getting started
 
+### Secure playbook
+
+This playbook will secure a bare server by doing the following:
+
+- install ufw, fail2ban and logwatch (daily email send to specified email address)
+- create a new user
+- deactivate root login
+- deactivate login with password
+- add specified ssh public key in authorized_keys
+
+:warning: because we deactivate login password, make sure that your ssh public key is given in the vars (`vars/ssh-public-key.yml`) to be able to login
+
 ```bash
-ansible-galaxy install jdauphant.nginx
-ansible-playbook bootstrap.yml -u root -K
+ansible-playbook secure.yml -u root
 ```
 
-## Make it yours
+### Node playbook
 
-- modify the email and the password in `vars/main.yml`
-- change the public keys in `vars/ssh-public-key.yml`
-- change the node version you want to install in `vars/nvm.yml`
-- add your server IPs in `hosts`
-- `ansible-playbook bootstrap.yml -u root -K`
+- install nvm
+- install node using nvm
+- install nginx
+
+```bash
+ansible-galaxy install DavidWittman.redis
+ansible-playbook node.yml -u deploy
+```
+
+
+### Redis playbook
+
+```bash
+ansible-galaxy install DavidWittman.redis
+ansible-playbook redis.yml -u deploy
+```
 
 ## Requirements
 

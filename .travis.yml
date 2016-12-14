@@ -16,5 +16,7 @@ script:
   - printf '[defaults]\nroles_path = ../' > ansible.cfg
   - ansible-galaxy install jdauphant.nginx
   - echo localhost > inventory
-  - ansible-playbook -i inventory playbook.yml --syntax-check
-  # - ansible-playbook -i inventory playbook.yml --connection=local --sudo
+  - ansible-playbook -i inventory secure.yml --syntax-check
+  - ansible-playbook -i inventory redis.yml --syntax-check
+  - ansible-playbook -i inventory node.yml --syntax-check
+  # - ansible-playbook -i inventory secure.yml --connection=local --sudo

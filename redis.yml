@@ -1,0 +1,17 @@
+---
+- name: Create a redis server
+  hosts: redis
+  become: yes
+  become_user: root
+  vars_files:
+    - vars/redis.yml
+
+  tasks:
+    - name: Open ufw to allow redis connections
+      ufw:
+        rule: allow
+        port: 6379
+        proto: tcp
+
+  roles:
+    - DavidWittman.redis

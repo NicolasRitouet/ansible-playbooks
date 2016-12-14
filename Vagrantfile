@@ -1,15 +1,27 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure('2') do |config|
-  config.vm.define 'dev' do |c|
-    c.vm.box = 'ubuntu/xenial64'
-    c.vm.network :private_network, ip: '192.168.88.27'
-    c.vm.hostname = 'ubuntu-xenial'
-    c.vm.provision 'ansible' do |ansible|
-      ansible.playbook = 'playbook.yml'
-      ansible.sudo = true
-      ansible.host_key_checking = false
-    end
+VAGRANTFILE_API_VERSION = "2"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.box = "ubuntu/xenial64"
+
+  config.vm.network "public_network", bridge: "en0: Wi-Fi (AirPort)"
+
+  config.ssh.insert_key = false
+
+  config.vm.define "localhost" do |l|
+    l.vm.hostname = "localhost"
+  end
+
+  config.vm.provider :virtualbox do |vb|
+    vb.name = "ubuntu-xenial"
+  end
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.sudo = true
+    ansible.playbook = "playbooks/main.yml"
+    ansible.verbose = "v"
+    ansible.host_key_checking = false
   end
 end

@@ -2,10 +2,11 @@
   user: name={{ server_user_name }} password={{ server_user_password }} shell=/bin/bash
 
 - name: Add user to sudoers
-  lineinfile: dest=/etc/sudoers
-              regexp="{{ server_user_name }} ALL"
-              line="{{ server_user_name }} ALL=(ALL:ALL) ALL"
-              state=present
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: "{{ server_user_name }} ALL"
+    line: '{{ server_user_name }} ALL=(ALL) NOPASSWD: ALL'
+    state: present
 
 - name: Add authorized_keys for the user
   authorized_key: user={{ server_user_name }} key="{{ item.key }}"
