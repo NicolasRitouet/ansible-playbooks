@@ -47,6 +47,7 @@ ansible-playbook secure.yml -u root
 ```bash
 ansible-galaxy install jdauphant.nginx
 ansible-playbook node.yml -u deploy
+```
 
 
 ### Redis playbook
