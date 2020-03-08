@@ -59,11 +59,8 @@ ansible-playbook redis.yml -u deploy
 
 ## Requirements
 
-- Ansible
+- Ansible 
 
-## TODO
-
-- add letsencrypt tasks
 
 ## Credits
 
